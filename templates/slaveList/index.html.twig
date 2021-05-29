@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+{% block title %}Добро пожаловать!{% endblock %}
+{% block body %}
+    <div style="display: flex">
+        <div style=" width: 300px; overflow: auto">
+            {{  renderMenu(path('slave-list')) }}
+        </div>
+        <div>
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+{% endblock %}

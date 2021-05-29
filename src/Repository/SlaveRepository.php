@@ -3,7 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\Slave;
+use App\Entity\Work;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -47,4 +49,21 @@ class SlaveRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    /**
+     * @param null $workId
+     * @return QueryBuilder
+     */
+    public function findByWorkId($workId = null): QueryBuilder
+    {
+        $queryBuilder = $this->createQueryBuilder('sl')
+            ->leftJoin('sl.works ', 'slw');
+         if (!$workId){
+             $queryBuilder->where('slw.id IS NULL');
+         }else {
+             $queryBuilder->where('slw.id = :workID');
+             $queryBuilder->setParameter('workID', $workId);
+         }
+        return $queryBuilder;
+    }
 }
