@@ -36,9 +36,15 @@ class Work
      */
     private $works;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Slave::class, mappedBy="works")
+     */
+    private $slaves;
+
     public function __construct()
     {
         $this->works = new ArrayCollection();
+        $this->slaves = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -103,5 +109,32 @@ class Work
     public function __toString()
     {
         return $this->getTitle();
+    }
+
+    /**
+     * @return Collection|Slave[]
+     */
+    public function getSlaves(): Collection
+    {
+        return $this->slaves;
+    }
+
+    public function addSlave(Slave $slave): self
+    {
+        if (!$this->slaves->contains($slave)) {
+            $this->slaves[] = $slave;
+            $slave->addWork($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSlave(Slave $slave): self
+    {
+        if ($this->slaves->removeElement($slave)) {
+            $slave->removeWork($this);
+        }
+
+        return $this;
     }
 }
