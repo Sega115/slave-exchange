@@ -40,7 +40,8 @@ class Slave
     private $age;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="float")
+     * @Assert\Type(type="float", message = "The value {{ value }} must be of type {{ type }}")
      * @Assert\NotBlank
      * @Assert\Positive
      */
@@ -129,12 +130,12 @@ class Slave
         return $this;
     }
 
-    public function getWeight(): ?string
+    public function getWeight(): ?float
     {
         return $this->weight;
     }
 
-    public function setWeight(string $weight): self
+    public function setWeight(float $weight): self
     {
         $this->weight = $weight;
 
