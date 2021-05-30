@@ -7,9 +7,9 @@ use Symfony\Component\Validator\Constraint;
 /**
  * @Annotation
  */
-class WorkParent extends Constraint
+class OrderDate extends Constraint
 {
-    public $message = 'Не может ссылаться на себя';
+    public $message = 'дата начала должна быть меньше чем дата конца';
 
     public function getTargets(): string
     {

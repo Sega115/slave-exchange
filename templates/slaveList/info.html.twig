@@ -1,0 +1,8 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <h1> {{ slave.name }}, {{ slave.age }}, {{ slave.gender }}, {{ slave.colorSkin }} </h1>
+    <h2>Всего за {{ slave.wageRate }} Р/Ч или за {{ slave.price }} Р навсегда! </h2>
+    <h2> Выловили: {{ slave.location }}</h2>
+    <p>{{ slave.description }}</p>
+    <a href="{{path('create-order',{'slaveID': slave.id})}}" style="padding: 10px; background: #0000cc; color: white">Оформить заказ</a>
+{% endblock %}

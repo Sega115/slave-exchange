@@ -1,6 +1,6 @@
 {% extends 'slaveList/index.html.twig' %}
 {% block content %}
     {% for slave in slaves %}
-        <p>{{ slave.name }}</p>
+        <p><a href="{{ path('slave-info', {'slaveID' : slave.id})}}">{{ slave.name }}</a></p>
     {% endfor %}
 {% endblock %}
